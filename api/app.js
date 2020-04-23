@@ -4,6 +4,12 @@ const bodyParser = require('body-parser')
 const express = require('express')
 const mongoose = require('mongoose')
 
+const index = require('./routes/index')
+const todos = require('./routes/todos')
+const shows = require('./routes/shows')
+const episodes = require('./routes/episodes')
+const seasons = require('./routes/seasons')
+
 const { PORT, DB_URI } = require('./utils/constants')
 
 const app = express()
@@ -12,9 +18,11 @@ const app = express()
 app.use(bodyParser.json())
 
 // Here are all the target routes
-app.use('/healthcheck', require('./routes/index').router)
-app.use('/todos', require('./routes/todos'))
-app.use('/shows', require('./routes/shows'))
+app.use('/healthcheck', index.router)
+app.use('/todos', todos)
+app.use('/shows', shows)
+app.use('/episodes', episodes)
+app.use('/seasons', seasons)
 
 app.use((error, req, res, next) => {
   if (req.file) {
