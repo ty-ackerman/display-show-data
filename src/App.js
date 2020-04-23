@@ -1,19 +1,14 @@
 import React, { useEffect } from 'react'
 import './App.css'
 import Logo from './logo.png'
-import Todos from './components/Todos'
 import imdb from './utils/imdb'
+import SearchResults from './sections/SearchResults'
 
 function App () {
-  useEffect(() => {
-    const shows = imdb.getSavedShows()
-    console.log(shows)
-  }, [])
-
   return (
     <div className='App'>
       <img src={Logo} alt='' />
-      <Todos />
+      <SearchResults />
     </div>
   )
 }
