@@ -5,10 +5,14 @@ import axios from 'axios'
 
 const imdb = {}
 
-imdb.getShows = async q => {
+imdb.getShow = async q => {
   return await axios.get(
     `https://imdb-api.com/en/API/SearchSeries/${process.env.REACT_APP_IMDB_API_KEY}/${q}`
   )
+}
+
+imdb.getSavedShows = async show => {
+  return await axios.get(`${process.env.REACT_APP_BACKEND_URL}/shows`)
 }
 
 export default imdb
