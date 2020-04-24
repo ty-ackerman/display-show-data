@@ -6,7 +6,7 @@ const { Season } = require('../models/Season');
 router.get('/:seasonId', async (req, res) => {
 	try {
 		const { seasonId } = req.params;
-		const season = await Season.find({ _id: seasonId });
+		const season = await Season.find({ _id: seasonId }).populate('episodes');
 		res.status(200).send({ message: 'Season found.', data: season });
 	} catch (error) {
 		res.status(500).send({ message: error.message });

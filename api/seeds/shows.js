@@ -1,4 +1,5 @@
 const { Show } = require('../models/Show');
+const seasons = require('./seasons');
 
 const shows = [];
 
@@ -8,7 +9,8 @@ const show1 = new Show({
 	image:
 		'https://imdb-api.com/images/original/MV5BNDQ5NDZiYjktZmFmMy00MjAxLTk1MDktOGZjYTY5YTE1ODdmXkEyXkFqcGdeQXVyNjcwMzEzMTU@._V1_Ratio0.7273_AL_.jpg',
 	title: 'Community',
-	description: '(2009) (TV Series)'
+	description: '(2009) (TV Series)',
+	seasons: seasons
 });
 
 const show2 = new Show({

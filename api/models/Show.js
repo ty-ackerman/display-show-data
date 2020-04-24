@@ -5,7 +5,13 @@ const showSchema = new Schema({
 	resultType: { type: String },
 	image: { type: String },
 	title: { type: String },
-	description: { type: String }
+	description: { type: String },
+	seasons: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'Season'
+		}
+	]
 });
 
 const Show = model('Show', showSchema);

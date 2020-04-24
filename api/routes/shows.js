@@ -3,11 +3,17 @@ const { Router } = require('express');
 const router = Router();
 const { Show } = require('../models/Show');
 
-router.get('/:searchTitle', async (req, res) => {
+router.get('/title/:searchTitle', async (req, res) => {
 	try {
 		const { searchTitle } = req.params;
 		const shows = await Show.find({
 			title: { $regex: searchTitle, $options: 'i' }
+		}).populate({
+			path: 'seasons',
+			populate: {
+				path: 'episodes',
+				model: 'Episode'
+			}
 		});
 		if (shows.length) {
 			res.status(200).send({ message: 'Successfully queried DB', data: shows });
@@ -21,7 +27,13 @@ router.get('/:searchTitle', async (req, res) => {
 
 router.get('/', async (req, res) => {
 	try {
-		const docs = await Show.find();
+		const docs = await Show.find().populate({
+			path: 'seasons',
+			populate: {
+				path: 'episodes',
+				model: 'Episode'
+			}
+		});
 		res.status(200).send({ message: 'Successfully retrieved shows.', data: docs });
 	} catch (error) {
 		res.status(500).send({ message: error.message });
