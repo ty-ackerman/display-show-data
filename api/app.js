@@ -1,48 +1,48 @@
-const fs = require('fs')
+const fs = require('fs');
 
-const bodyParser = require('body-parser')
-const express = require('express')
-const mongoose = require('mongoose')
+const bodyParser = require('body-parser');
+const express = require('express');
+const mongoose = require('mongoose');
 
-const index = require('./routes/index')
-const todos = require('./routes/todos')
-const shows = require('./routes/shows')
-const episodes = require('./routes/episodes')
-const seasons = require('./routes/seasons')
+const index = require('./routes/index');
+const todos = require('./routes/todos');
+const shows = require('./routes/shows');
+const episodes = require('./routes/episodes');
+const seasons = require('./routes/seasons');
 
-const { PORT, DB_URI } = require('./utils/constants')
+const { PORT, DB_URI } = require('./utils/constants');
 
-const app = express()
+const app = express();
 
 // app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 // Here are all the target routes
-app.use('/healthcheck', index.router)
-app.use('/todos', todos)
-app.use('/shows', shows)
-app.use('/episodes', episodes)
-app.use('/seasons', seasons)
+app.use('/healthcheck', index.router);
+app.use('/todos', todos);
+app.use('/shows', shows);
+app.use('/episodes', episodes);
+app.use('/seasons', seasons);
 
 app.use((error, req, res, next) => {
-  if (req.file) {
-    fs.unlink(req.file.path, err => {
-      console.log(err)
-    })
-  }
-  if (res.headerSent) {
-    return next(error)
-  }
-  res.status(error.code || 500)
-  res.json({ message: error.message || 'An unknown error occurred!' })
-})
+	if (req.file) {
+		fs.unlink(req.file.path, (err) => {
+			console.log(err);
+		});
+	}
+	if (res.headerSent) {
+		return next(error);
+	}
+	res.status(error.code || 500);
+	res.json({ message: error.message || 'An unknown error occurred!' });
+});
 
 app.listen(PORT, async () => {
-  await mongoose.connect(DB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
-  console.log(`App listening on port ${PORT}`)
-})
+	await mongoose.connect(DB_URI, {
+		useNewUrlParser: true,
+		useUnifiedTopology: true
+	});
+	console.log(`App listening on port ${PORT}`);
+});
 
-module.exports = app
+module.exports = app;

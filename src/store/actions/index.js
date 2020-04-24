@@ -1,1 +1,1 @@
-export { storeTodo, deleteTodo, storeChecked, loadTodos } from './todos'
+export { storeTodo, deleteTodo, storeChecked, loadTodos } from './todos';

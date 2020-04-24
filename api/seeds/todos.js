@@ -1,18 +1,18 @@
-const { Todo } = require('../models/Todo')
+const { Todo } = require('../models/Todo');
 
-const todos = []
+const todos = [];
 
 const todo1 = new Todo({
-  done: true,
-  name: 'Set up BE'
-})
+	done: true,
+	name: 'Set up BE'
+});
 
 const todo2 = new Todo({
-  done: false,
-  name: 'Add Redux Support'
-})
+	done: false,
+	name: 'Add Redux Support'
+});
 
-todos.push(todo1)
-todos.push(todo2)
+todos.push(todo1);
+todos.push(todo2);
 
-module.exports = todos
+module.exports = todos;
