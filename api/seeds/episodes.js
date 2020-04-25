@@ -1,8 +1,6 @@
-const { Episode } = require('../models/Episode');
-
 const episodes = [];
 
-const episode1 = new Episode({
+const episode1 = {
 	id: 'tt1986325',
 	seasonNumber: '3',
 	episodeNumber: '1',
@@ -15,9 +13,9 @@ const episode1 = new Episode({
 		"Jeff's plan to keep Pierce out of the Study Group backfires when he gets kicked out instead, Abed copes with bad news about Cougar Town, and Dean Pelton's authority is challenged by another Greendale dean.",
 	imDbRating: '8.1',
 	imDbRatingCount: '1886'
-});
+};
 
-const episode2 = new Episode({
+const episode2 = {
 	id: 'tt2060962',
 	seasonNumber: '3',
 	episodeNumber: '2',
@@ -30,9 +28,9 @@ const episode2 = new Episode({
 		"When another over-achieving student steals Annie's idea for a Model U.N. club, the Study Group comes to her rescue. Meanwhile, new security cop Chang tries to stop Britta's last-ditch efforts to create a campus disturbance.",
 	imDbRating: '8.2',
 	imDbRatingCount: '1822'
-});
+};
 
-const episode3 = new Episode({
+const episode3 = {
 	id: 'tt2063144',
 	seasonNumber: '3',
 	episodeNumber: '3',
@@ -45,9 +43,9 @@ const episode3 = new Episode({
 		'Chaos ensues when the Study Group tries to divide itself up into biology lab partners, and Chang appoints himself security "detective," and tries to solve a mystery that is only in his head.',
 	imDbRating: '8.1',
 	imDbRatingCount: '1809'
-});
+};
 
-const episode4 = new Episode({
+const episode4 = {
 	id: 'tt2060963',
 	seasonNumber: '3',
 	episodeNumber: '4',
@@ -60,9 +58,9 @@ const episode4 = new Episode({
 		"At Abed and Troy's housewarming party, Jeff decides to let the decision on who gets the pizza rest on the roll of the dice, leaving Abed to contemplate six alternate realities.",
 	imDbRating: '9.8',
 	imDbRatingCount: '5962'
-});
+};
 
-const episode5 = new Episode({
+const episode5 = {
 	id: 'tt2063145',
 	seasonNumber: '3',
 	episodeNumber: '5',
@@ -75,9 +73,9 @@ const episode5 = new Episode({
 		'During her pre-Halloween party, Britta gets everyone to tell a spooky story so that she can find out which member of the study group scored out as a psychopath on their psychology profiles.',
 	imDbRating: '8.8',
 	imDbRatingCount: '2109'
-});
+};
 
-const episode6 = new Episode({
+const episode6 = {
 	id: 'tt2049724',
 	seasonNumber: '3',
 	episodeNumber: '6',
@@ -90,9 +88,9 @@ const episode6 = new Episode({
 		'Pierce gets a visit from his bigoted father after his wipes become a hit in the gay community, and the dean of the School of Refrigeration recruits Troy to become his student.',
 	imDbRating: '7.7',
 	imDbRatingCount: '1746'
-});
+};
 
-const episode7 = new Episode({
+const episode7 = {
 	id: 'tt2083482',
 	seasonNumber: '3',
 	episodeNumber: '7',
@@ -105,9 +103,9 @@ const episode7 = new Episode({
 		'The study group helps Annie move in with Troy and Abed - except for Jeff, who lies to get out of it but is busted by dean Pelton.',
 	imDbRating: '8.6',
 	imDbRatingCount: '1908'
-});
+};
 
-const episode8 = new Episode({
+const episode8 = {
 	id: 'tt2083483',
 	seasonNumber: '3',
 	episodeNumber: '8',
@@ -120,9 +118,9 @@ const episode8 = new Episode({
 		'Dean Pelton is given the task to make an updated Greendale television commercial, but the shoot soon goes over budget and spirals out of control, descending the dean into madness--with Abed documenting the entire experience.',
 	imDbRating: '9.0',
 	imDbRatingCount: '2267'
-});
+};
 
-const episode9 = new Episode({
+const episode9 = {
 	id: 'tt2080563',
 	seasonNumber: '3',
 	episodeNumber: '9',
@@ -135,9 +133,9 @@ const episode9 = new Episode({
 		"Shirley teaches Jeff foosball so that he can beat a team of cocky, obnoxious Germans, while Annie creates an overly elaborate ruse so that she doesn't have to tell Abed that she broke his special edition The Dark Knight DVD.",
 	imDbRating: '8.5',
 	imDbRatingCount: '1878'
-});
+};
 
-const episode10 = new Episode({
+const episode10 = {
 	id: 'tt2105238',
 	seasonNumber: '3',
 	episodeNumber: '10',
@@ -150,9 +148,9 @@ const episode10 = new Episode({
 		'A holiday-themed parody of "Glee" in which Abed tries to persuade each member of the Study Group to join the glee club so that they can qualify for regionals.',
 	imDbRating: '8.7',
 	imDbRatingCount: '2225'
-});
+};
 
-const episode11 = new Episode({
+const episode11 = {
 	id: 'tt2117096',
 	seasonNumber: '3',
 	episodeNumber: '11',
@@ -165,9 +163,9 @@ const episode11 = new Episode({
 		'Pierce comes to Shirley with a business proposal just as she\'s about to get married to Andre. Meanwhile, Troy and Abed try to act "normal" for the wedding, Britta discovers a new skill, and Jeff struggles with his toast.',
 	imDbRating: '7.8',
 	imDbRatingCount: '1759'
-});
+};
 
-const episode12 = new Episode({
+const episode12 = {
 	id: 'tt2090774',
 	seasonNumber: '3',
 	episodeNumber: '12',
@@ -180,9 +178,9 @@ const episode12 = new Episode({
 		"The members of the Study Group take jobs as celebrity impersonators to pay off Abed's debt to a celebrity impersonator business, but can Jeff be Ryan Seacrest without his fragile ego spiral out of control?",
 	imDbRating: '8.1',
 	imDbRatingCount: '1773'
-});
+};
 
-const episode13 = new Episode({
+const episode13 = {
 	id: 'tt2128972',
 	seasonNumber: '3',
 	episodeNumber: '13',
@@ -195,9 +193,9 @@ const episode13 = new Episode({
 		'Shirley and Pierce recruit Britta to sabotage the new Subway restaurant in the cafeteria. Jeff finds a hate-letter in the school locker he never realized he had. Troy and Abed begin constructing a pillow fort, but thanks to some outside manipulation Troy splits off to build his own blanket fort.',
 	imDbRating: '8.2',
 	imDbRatingCount: '1752'
-});
+};
 
-const episode14 = new Episode({
+const episode14 = {
 	id: 'tt2127579',
 	seasonNumber: '3',
 	episodeNumber: '14',
@@ -210,9 +208,9 @@ const episode14 = new Episode({
 		'The United Forts of Pillowtown, headed by Abed, is at war with the Legit Republic of Blanketsburg, ruled by Troy. Annie sets up a hospital zone to treat casualties on both sides. Britta takes a stab at war-photography. Jeff tries to reunite two former friends turned mortal enemies using sarcasm.',
 	imDbRating: '9.3',
 	imDbRatingCount: '2990'
-});
+};
 
-const episode15 = new Episode({
+const episode15 = {
 	id: 'tt2194835',
 	seasonNumber: '3',
 	episodeNumber: '15',
@@ -225,9 +223,9 @@ const episode15 = new Episode({
 		"While Britta struggles to stay away from her old carny boyfriend, Jeff becomes obsessed with their relationship. Meanwhile, the dean stops by Troy and Abed's to recruit Troy for the dean of the school of refrigeration.",
 	imDbRating: '8.2',
 	imDbRatingCount: '1753'
-});
+};
 
-const episode16 = new Episode({
+const episode16 = {
 	id: 'tt2194837',
 	seasonNumber: '3',
 	episodeNumber: '16',
@@ -240,9 +238,9 @@ const episode16 = new Episode({
 		"The study group takes a three hour lunch. Annie suggests Abed shows her how the Dreamatorium works so Troy and Britta can be together. But their 'Inspector Spacetime' simulation soon turns into a hospital bound drama in which Abed takes on the personalities of the other group members.",
 	imDbRating: '8.7',
 	imDbRatingCount: '1984'
-});
+};
 
-const episode17 = new Episode({
+const episode17 = {
 	id: 'tt2194839',
 	seasonNumber: '3',
 	episodeNumber: '17',
@@ -252,12 +250,12 @@ const episode17 = new Episode({
 	year: '2012',
 	released: '26 Apr. 2012',
 	plot:
-		'Presented like an episode of Law & Order (1990), the study group attempts to find out who squashed their biology project: a yam. Troy and Abed become detectives, Shirley is their boss, Jeff and Annie pose as prosecuting attorneys, while Pierce is an informant and Britta a lab tech.',
+		'Presented like an episode of Law & Order (1990, the study group attempts to find out who squashed their biology project: a yam. Troy and Abed become detectives, Shirley is their boss, Jeff and Annie pose as prosecuting attorneys, while Pierce is an informant and Britta a lab tech.',
 	imDbRating: '9.4',
 	imDbRatingCount: '2872'
-});
+};
 
-const episode18 = new Episode({
+const episode18 = {
 	id: 'tt2192103',
 	seasonNumber: '3',
 	episodeNumber: '18',
@@ -270,9 +268,9 @@ const episode18 = new Episode({
 		'A fellow student has died and Biology class has been canceled, meaning everyone has to retake it in summer school. When the memorial service turns into a riot, Chang is granted special authoritative powers.',
 	imDbRating: '8.3',
 	imDbRatingCount: '1671'
-});
+};
 
-const episode19 = new Episode({
+const episode19 = {
 	id: 'tt2196353',
 	seasonNumber: '3',
 	episodeNumber: '19',
@@ -285,9 +283,9 @@ const episode19 = new Episode({
 		'When Abed claims the Dean has been replaced by a doppelgänger he is forced to take psychiatric treatment. Naturally, the rest of the study group joins him at his session with Dr. Heidi.',
 	imDbRating: '9.2',
 	imDbRatingCount: '2220'
-});
+};
 
-const episode20 = new Episode({
+const episode20 = {
 	id: 'tt2383315',
 	seasonNumber: '3',
 	episodeNumber: '20',
@@ -300,9 +298,9 @@ const episode20 = new Episode({
 		'The Study Group must help Hawthorne win a video game so that he can claim his inheritance, but somebody may be out to ensure that he loses.',
 	imDbRating: '9.5',
 	imDbRatingCount: '3129'
-});
+};
 
-const episode21 = new Episode({
+const episode21 = {
 	id: 'tt2279599',
 	seasonNumber: '3',
 	episodeNumber: '21',
@@ -315,9 +313,9 @@ const episode21 = new Episode({
 		'The Study Group, now known as the "Greendale Seven," launches a plot to rescue the real dean Pelton and end Chang\'s reign of terror over Greendale.',
 	imDbRating: '9.1',
 	imDbRatingCount: '2074'
-});
+};
 
-const episode22 = new Episode({
+const episode22 = {
 	id: 'tt2383317',
 	seasonNumber: '3',
 	episodeNumber: '22',
@@ -330,7 +328,7 @@ const episode22 = new Episode({
 		'Jeff faces an old nemesis as Shirley and Pierce square off in Greendale court, Abed succumbs to his evil alter ego, and Troy decides to meet his destiny at air conditioning school.',
 	imDbRating: '8.9',
 	imDbRatingCount: '1901'
-});
+};
 
 episodes.push(
 	episode1,

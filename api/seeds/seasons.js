@@ -1,13 +1,17 @@
-const { Season } = require('../models/Season');
 const episodes = require('./episodes');
 
 const seasons = [];
 
-const season3 = new Season({
+const season2 = {
+	seasonNumber: 2,
+	episodes
+};
+
+const season3 = {
 	seasonNumber: 3,
 	episodes
-});
+};
 
-seasons.push(season3);
+seasons.push(season2, season3);
 
 module.exports = seasons;

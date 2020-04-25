@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './App.css';
 import Logo from './logo.png';
-import imdb from './utils/imdb';
 import SearchResults from './sections/SearchResults';
 
 function App() {

@@ -7,8 +7,6 @@ const mongoose = require('mongoose');
 const index = require('./routes/index');
 const todos = require('./routes/todos');
 const shows = require('./routes/shows');
-const episodes = require('./routes/episodes');
-const seasons = require('./routes/seasons');
 
 const { PORT, DB_URI } = require('./utils/constants');
 
@@ -21,8 +19,6 @@ app.use(bodyParser.json());
 app.use('/healthcheck', index.router);
 app.use('/todos', todos);
 app.use('/shows', shows);
-app.use('/episodes', episodes);
-app.use('/seasons', seasons);
 
 app.use((error, req, res, next) => {
 	if (req.file) {

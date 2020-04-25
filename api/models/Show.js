@@ -6,12 +6,7 @@ const showSchema = new Schema({
 	image: { type: String },
 	title: { type: String },
 	description: { type: String },
-	seasons: [
-		{
-			type: Schema.Types.ObjectId,
-			ref: 'Season'
-		}
-	]
+	seasons: { type: Array, default: [] }
 });
 
 const Show = model('Show', showSchema);

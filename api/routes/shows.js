@@ -8,12 +8,6 @@ router.get('/title/:searchTitle', async (req, res) => {
 		const { searchTitle } = req.params;
 		const shows = await Show.find({
 			title: { $regex: searchTitle, $options: 'i' }
-		}).populate({
-			path: 'seasons',
-			populate: {
-				path: 'episodes',
-				model: 'Episode'
-			}
 		});
 		if (shows.length) {
 			res.status(200).send({ message: 'Successfully queried DB', data: shows });
@@ -25,15 +19,19 @@ router.get('/title/:searchTitle', async (req, res) => {
 	}
 });
 
+router.get('/id/:_id', async (req, res) => {
+	try {
+		const { _id } = req.params;
+		const doc = await Show.findById(_id);
+		res.status(200).send({ message: 'Successfully found episode', data: doc });
+	} catch (error) {
+		res.status(500).send({ message: error.message });
+	}
+});
+
 router.get('/', async (req, res) => {
 	try {
-		const docs = await Show.find().populate({
-			path: 'seasons',
-			populate: {
-				path: 'episodes',
-				model: 'Episode'
-			}
-		});
+		const docs = await Show.find();
 		res.status(200).send({ message: 'Successfully retrieved shows.', data: docs });
 	} catch (error) {
 		res.status(500).send({ message: error.message });
@@ -47,6 +45,16 @@ router.post('/', async (req, res) => {
 		});
 		await show.save();
 		res.status(200).send({ message: 'Successfully saved show.', data: show });
+	} catch (error) {
+		res.status(500).send({ message: error.message });
+	}
+});
+
+router.patch('/seasons', async (req, res) => {
+	try {
+		const { _id, seasons } = req.body;
+		const doc = await Show.findByIdAndUpdate(_id, { seasons });
+		res.status(200).send({ data: doc, message: 'Successfully saved seasons' });
 	} catch (error) {
 		res.status(500).send({ message: error.message });
 	}
