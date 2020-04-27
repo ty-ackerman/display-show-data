@@ -6,7 +6,7 @@ const { Show } = require('../models/Show');
 router.get('/imdb/:id', async (req, res) => {
 	try {
 		const { id } = req.params;
-		const show = await Show.find({
+		const show = await Show.findOne({
 			id: id
 		});
 		res.status(200).send({ message: 'Successfully queried DB', data: show });
@@ -65,7 +65,11 @@ router.post('/', async (req, res) => {
 router.patch('/seasons', async (req, res) => {
 	try {
 		const { _id, seasons, fullTitle, lastUpdated } = req.body;
-		const doc = await Show.findByIdAndUpdate(_id, { seasons, fullTitle, lastUpdated });
+		const doc = await Show.findByIdAndUpdate(_id, {
+			seasons: seasons,
+			fullTitle: fullTitle,
+			lastUpdated: lastUpdated
+		});
 		res.status(200).send({ data: doc, message: 'Successfully saved seasons' });
 	} catch (error) {
 		res.status(500).send({ message: error.message });
