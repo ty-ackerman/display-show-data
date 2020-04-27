@@ -10,6 +10,7 @@ const show1 = new Show({
 		'https://imdb-api.com/images/original/MV5BNDQ5NDZiYjktZmFmMy00MjAxLTk1MDktOGZjYTY5YTE1ODdmXkEyXkFqcGdeQXVyNjcwMzEzMTU@._V1_Ratio0.7273_AL_.jpg',
 	title: 'Community',
 	description: '(2009) (TV Series)',
+	fullTitle: 'Community (TV Series 2009–2015)',
 	seasons: seasons
 });
 

@@ -687,35 +687,61 @@ imdb.seasons = [
 	}
 ];
 
-imdb.getShow = async (q) =>
-	await axios.get(`https://imdb-api.com/en/API/SearchSeries/${process.env.REACT_APP_IMDB_API_KEY}/${q}`);
+imdb.MONTH = 2592000000;
+imdb.runningRegex = /^[0-9]{4}\S\D/g;
 
-imdb.getEpisodes = async (id, season) => {
-	// gets a list of all episodes in a season
-	return await axios.get(
-		`https://imdb-api.com/en/API/SeasonEpisodes/${process.env.REACT_APP_IMDB_API_KEY}/${id}/${season}`
-	);
-
-	// return imdb.seasons[season];
+// STEP 1 - Gets the show titles + info from IMDB
+imdb.getShow = async (q) => {
+	const data = await axios.get(`https://imdb-api.com/en/API/SearchSeries/${process.env.REACT_APP_IMDB_API_KEY}/${q}`);
+	return data.data.results;
 };
 
-imdb.getSavedShows = async (show) => await axios.get(`${process.env.REACT_APP_BACKEND_URL}/shows`);
+// STEP 2 - User selects show -> Check MongoDB for series
+imdb.queryDbForShow = async (imdbId) => await axios.get(`${process.env.REACT_APP_BACKEND_URL}/shows/imdb/${imdbId}`);
 
-imdb.queryDbForShow = async (title) => await axios.get(`${process.env.REACT_APP_BACKEND_URL}/shows/title/${title}`);
+// STEP 3 -  Check to see if show is updated in MongoDB
+imdb.isUpdated = (lastUpdated, fullTitle) => lastUpdated.parseint() < imdb.MONTH && !fullTitle.match(imdb.runningRegex);
 
-imdb.addSeasons = async (_id, seasons) =>
-	await axios.patch(`${process.env.REACT_APP_BACKEND_URL}/shows/seasons`, { _id, seasons });
+// OPTION A - Show is not in MongoDB -> Step 2 = []
+// OPTION B - Show is in MongoDB, but out of date -> second fuction false
 
-imdb.getSeasons = async (id, i = 1) => {
+// In both A + B -> execute the following:
+
+imdb.updateShow = async (imdbId, _id) => {
+	const { seasons, fullTitle } = await imdb.getSeasons(imdbId);
+	const updatedShow = await imdb.addSeasons(_id, seasons, fullTitle);
+	return updatedShow;
+};
+
+// Extra functions
+
+imdb.getSeasons = async (imdbId, i = 1) => {
 	const seasons = [];
-	let season = (await imdb.getEpisodes(id, i)).data;
+	let season = (await imdb.getEpisodes(imdbId, i)).data;
+	const { fullTitle } = season;
 	while (season.episodes.length) {
 		seasons.push(season);
 		i++;
-		season = (await imdb.getEpisodes(id, i)).data;
+		season = (await imdb.getEpisodes(imdbId, i)).data;
 	}
 
-	return seasons;
+	return { seasons, fullTitle };
 };
+
+imdb.getEpisodes = async (imdbId, season) => {
+	// gets a list of all episodes in a season
+	const data = await axios.get(
+		`https://imdb-api.com/en/API/SeasonEpisodes/${process.env.REACT_APP_IMDB_API_KEY}/${imdbId}/${season}`
+	);
+	return data.data.results;
+};
+
+imdb.addSeasons = async (_id, seasons, fullTitle) =>
+	await axios.patch(`${process.env.REACT_APP_BACKEND_URL}/shows/seasons`, {
+		_id,
+		seasons,
+		fullTitle,
+		lastUpdated: new Date().getTime()
+	});
 
 export default imdb;

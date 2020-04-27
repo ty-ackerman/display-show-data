@@ -3,6 +3,18 @@ const { Router } = require('express');
 const router = Router();
 const { Show } = require('../models/Show');
 
+router.get('/imdb/:id', async (req, res) => {
+	try {
+		const { id } = req.params;
+		const show = await Show.find({
+			id: id
+		});
+		res.status(200).send({ message: 'Successfully queried DB', data: show });
+	} catch (error) {
+		res.status(500).send({ message: error.message });
+	}
+});
+
 router.get('/title/:searchTitle', async (req, res) => {
 	try {
 		const { searchTitle } = req.params;
@@ -52,8 +64,8 @@ router.post('/', async (req, res) => {
 
 router.patch('/seasons', async (req, res) => {
 	try {
-		const { _id, seasons } = req.body;
-		const doc = await Show.findByIdAndUpdate(_id, { seasons });
+		const { _id, seasons, fullTitle, lastUpdated } = req.body;
+		const doc = await Show.findByIdAndUpdate(_id, { seasons, fullTitle, lastUpdated });
 		res.status(200).send({ data: doc, message: 'Successfully saved seasons' });
 	} catch (error) {
 		res.status(500).send({ message: error.message });
