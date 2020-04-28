@@ -13,7 +13,8 @@ const { PORT, DB_URI } = require('./utils/constants');
 const app = express();
 
 // app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb' }));
 
 // Here are all the target routes
 app.use('/healthcheck', index.router);

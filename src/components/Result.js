@@ -10,11 +10,13 @@ export default function Result(props) {
 
 	const handleClick = async () => {
 		const dbShow = await imdb.queryDbForShow(id);
-		console.log(dbShow);
-		debugger;
 		if (!dbShow) {
 			await setShow(await imdb.addShow(props.result));
-		} else if (!imdb.isUpdated(dbShow.lastUpdated, dbShow.fullTitle)) {
+		} else if (
+			!dbShow.seasons ||
+			dbShow.seasons.length < 1 ||
+			!imdb.isUpdated(dbShow.lastUpdated, dbShow.fullTitle)
+		) {
 			await setShow(await imdb.updateShow(id, dbShow._id));
 		} else {
 			setShow(dbShow);

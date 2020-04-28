@@ -688,11 +688,13 @@ imdb.seasons = [
 ];
 
 imdb.MONTH = 2592000000;
-imdb.runningRegex = /^[0-9]{4}\S\D/g;
+imdb.runningRegex = /[0-9]{4}\S\D/g;
 
 // STEP 1 - Gets the show titles + info from IMDB
 imdb.getShow = async (q) => {
-	const data = await axios.get(`https://imdb-api.com/en/API/SearchSeries/${process.env.REACT_APP_IMDB_API_KEY}/${q}`);
+	const data = await axios.get(
+		`https://imdb-api.com/en/API/SearchSeries/${process.env.REACT_APP_IMDB_API_KEY3}/${q}`
+	);
 	return data.data.results;
 };
 
@@ -703,7 +705,11 @@ imdb.queryDbForShow = async (imdbId) => {
 };
 
 // STEP 3 -  Check to see if show is updated in MongoDB
-imdb.isUpdated = (lastUpdated, fullTitle) => parseInt(lastUpdated) < imdb.MONTH && !fullTitle.match(imdb.runningRegex);
+imdb.isUpdated = (lastUpdated, fullTitle) => {
+	const updatedRecently = parseInt(lastUpdated) + imdb.MONTH > new Date().getTime();
+	const stillRunning = fullTitle.match(imdb.runningRegex);
+	return updatedRecently && stillRunning == null;
+};
 
 // OPTION A - Show is not in MongoDB -> Step 2 = []
 imdb.addShow = async (show) => {
@@ -739,13 +745,12 @@ imdb.getSeasons = async (imdbId, i = 1) => {
 imdb.getEpisodes = async (imdbId, season) => {
 	// gets a list of all episodes in a season
 	const res = await axios.get(
-		`https://imdb-api.com/en/API/SeasonEpisodes/${process.env.REACT_APP_IMDB_API_KEY}/${imdbId}/${season}`
+		`https://imdb-api.com/en/API/SeasonEpisodes/${process.env.REACT_APP_IMDB_API_KEY3}/${imdbId}/${season}`
 	);
 	return res.data;
 };
 
 imdb.addSeasons = async (_id, seasons, fullTitle) => {
-	debugger;
 	const res = await axios.patch(`${process.env.REACT_APP_BACKEND_URL}/shows/seasons`, {
 		_id,
 		seasons,
