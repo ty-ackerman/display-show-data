@@ -10,14 +10,10 @@ import { BrowserRouter } from 'react-router-dom';
 
 // Import all reducers here
 import todosReducer from './store/reducers/todos';
+import showReducer from './store/reducers/reducer';
 
 // To get access to Redux dev tools
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-const rootReducer = combineReducers({
-	tds: todosReducer
-	// Add all reducers within this object
-});
 
 // Simple middleware to log whenever an action is dispatched
 const logger = (store) => {
@@ -31,7 +27,7 @@ const logger = (store) => {
 	};
 };
 
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(logger, thunk)));
+const store = createStore(showReducer, composeEnhancers(applyMiddleware(logger, thunk)));
 
 ReactDOM.render(
 	<Provider store={store}>

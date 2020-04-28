@@ -65,11 +65,19 @@ router.post('/', async (req, res) => {
 router.patch('/seasons', async (req, res) => {
 	try {
 		const { _id, seasons, fullTitle, lastUpdated } = req.body;
-		const doc = await Show.findByIdAndUpdate(_id, {
-			seasons: seasons,
-			fullTitle: fullTitle,
-			lastUpdated: lastUpdated
-		});
+		console.log(seasons);
+		const doc = await Show.findOneAndUpdate(
+			{ _id: _id },
+			{
+				$set: {
+					seasons: seasons,
+					fullTitle: fullTitle,
+					lastUpdated: lastUpdated
+				}
+			},
+			{ new: true }
+		);
+		console.log(doc);
 		res.status(200).send({ data: doc, message: 'Successfully saved seasons' });
 	} catch (error) {
 		res.status(500).send({ message: error.message });
