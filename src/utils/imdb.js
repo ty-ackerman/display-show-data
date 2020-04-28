@@ -689,11 +689,12 @@ imdb.seasons = [
 
 imdb.MONTH = 2592000000;
 imdb.runningRegex = /[0-9]{4}\S\D/g;
+imdb.idRegex = /\w+$/g;
 
 // STEP 1 - Gets the show titles + info from IMDB
 imdb.getShow = async (q) => {
 	const data = await axios.get(
-		`https://imdb-api.com/en/API/SearchSeries/${process.env.REACT_APP_IMDB_API_KEY4}/${q}`
+		`https://imdb-api.com/en/API/SearchSeries/${process.env.REACT_APP_IMDB_API_KEY1}/${q}`
 	);
 	return data.data.results;
 };
@@ -746,7 +747,7 @@ imdb.getSeasons = async (imdbId, i = 1) => {
 imdb.getEpisodes = async (imdbId, season) => {
 	// gets a list of all episodes in a season
 	const res = await axios.get(
-		`https://imdb-api.com/en/API/SeasonEpisodes/${process.env.REACT_APP_IMDB_API_KEY4}/${imdbId}/${season}`
+		`https://imdb-api.com/en/API/SeasonEpisodes/${process.env.REACT_APP_IMDB_API_KEY1}/${imdbId}/${season}`
 	);
 	return res.data;
 };

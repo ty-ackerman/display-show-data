@@ -9,7 +9,6 @@ import thunk from 'redux-thunk'; // Middleware for asynchronous API calls
 import { BrowserRouter } from 'react-router-dom';
 
 // Import all reducers here
-import todosReducer from './store/reducers/todos';
 import showReducer from './store/reducers/reducer';
 
 // To get access to Redux dev tools

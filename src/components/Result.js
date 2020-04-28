@@ -7,7 +7,6 @@ import { useHistory } from 'react-router-dom';
 import * as actionCreators from '../store/actions/index';
 
 function Result(props) {
-	const [ show, setShow ] = useState({});
 	const { title, id } = props.result;
 	const history = useHistory();
 
@@ -24,8 +23,7 @@ function Result(props) {
 		} else {
 			props.onSaveShow(dbShow);
 		}
-
-		// history.push(`/show?id=${show._id}`);
+		history.push(`/show?id=${props.result.id}`);
 	};
 	return (
 		<div>

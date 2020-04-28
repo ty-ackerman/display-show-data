@@ -1,2 +1,1 @@
-export { storeTodo, deleteTodo, storeChecked, loadTodos } from './todos';
-export { storeShow } from './actions';
+export { storeShow, storeSearch, storeSearchResults } from './actions';

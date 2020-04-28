@@ -1,10 +1,18 @@
 import * as actionTypes from './actionTypes';
-import imdb from '../../utils/imdb';
 
 export const storeShow = (show) => {
-	// BE
 	return {
-		type: actionTypes.SAVE,
+		type: actionTypes.SAVE_SHOW,
 		show: show
 	};
 };
+
+export const storeSearch = (q) => ({
+	type: actionTypes.SAVE_SEARCH,
+	search: q
+});
+
+export const storeSearchResults = (shows) => ({
+	type: actionTypes.SAVE_RESULTS,
+	results: shows
+});

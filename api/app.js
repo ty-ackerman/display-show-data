@@ -5,7 +5,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 const index = require('./routes/index');
-const todos = require('./routes/todos');
 const shows = require('./routes/shows');
 
 const { PORT, DB_URI } = require('./utils/constants');
@@ -18,7 +17,6 @@ app.use(express.urlencoded({ limit: '50mb' }));
 
 // Here are all the target routes
 app.use('/healthcheck', index.router);
-app.use('/todos', todos);
 app.use('/shows', shows);
 
 app.use((error, req, res, next) => {

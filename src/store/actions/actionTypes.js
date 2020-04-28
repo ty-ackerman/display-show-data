@@ -1,9 +1,3 @@
-export const LOAD = 'LOAD';
-export const ADD = 'ADD';
-export const DELETE = 'DELETE';
-export const CHECK = 'CHECK';
-
-// ------------------------------------------------------------
-
-export const SAVE = 'SAVE';
-export const UPDATE = 'UPDATE';
+export const SAVE_SHOW = 'SAVE_SHOW';
+export const SAVE_SEARCH = 'SAVE_SEARCH';
+export const SAVE_RESULTS = 'SAVE_RESULTS';
