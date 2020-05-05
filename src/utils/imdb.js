@@ -687,16 +687,21 @@ imdb.seasons = [
 	}
 ];
 
-imdb.MONTH = 2592000000;
+imdb.DAY = 86400000;
 imdb.runningRegex = /[0-9]{4}\S\D/g;
 imdb.idRegex = /\w+$/g;
+imdb.isShowRegex = /\w+/g;
 
 // STEP 1 - Gets the show titles + info from IMDB
 imdb.getShow = async (q) => {
 	const data = await axios.get(
-		`https://imdb-api.com/en/API/SearchSeries/${process.env.REACT_APP_IMDB_API_KEY1}/${q}`
+		`https://imdb-api.com/en/API/SearchSeries/${process.env.REACT_APP_IMDB_API_KEY2}/${q}`
 	);
-	return data.data.results;
+	return data.data.results.filter((show) => {
+		const [ year, medium, type ] = show.description.match(imdb.isShowRegex);
+		show.year = year;
+		return type === 'Series';
+	});
 };
 
 // STEP 2 - User selects show -> Check MongoDB for series
@@ -707,7 +712,7 @@ imdb.queryDbForShow = async (imdbId) => {
 
 // STEP 3 -  Check to see if show is updated in MongoDB
 imdb.isUpdated = (lastUpdated, fullTitle) => {
-	const updatedRecently = parseInt(lastUpdated) + imdb.MONTH > new Date().getTime();
+	const updatedRecently = parseInt(lastUpdated) + imdb.DAY * 7 > new Date().getTime();
 	// temporarily removed stillRunning to limit the amount of requests
 	// const stillRunning = fullTitle.match(imdb.runningRegex);
 	return updatedRecently;
@@ -747,7 +752,7 @@ imdb.getSeasons = async (imdbId, i = 1) => {
 imdb.getEpisodes = async (imdbId, season) => {
 	// gets a list of all episodes in a season
 	const res = await axios.get(
-		`https://imdb-api.com/en/API/SeasonEpisodes/${process.env.REACT_APP_IMDB_API_KEY1}/${imdbId}/${season}`
+		`https://imdb-api.com/en/API/SeasonEpisodes/${process.env.REACT_APP_IMDB_API_KEY2}/${imdbId}/${season}`
 	);
 	return res.data;
 };
@@ -760,6 +765,39 @@ imdb.addSeasons = async (_id, seasons, fullTitle) => {
 		lastUpdated: new Date().getTime()
 	});
 	return res.data.data;
+};
+
+imdb.getStats = (seasons = []) => {
+	let count = 0;
+	let max = 0;
+	let min = 10;
+	let longestSeason = 0;
+	const total = seasons.reduce((tot, episodes) => {
+		longestSeason = episodes.length > longestSeason ? episodes.length : longestSeason;
+		const sum = episodes.reduce((tot, cur) => {
+			const rating = parseFloat(cur.imDbRating);
+			if (rating > max) {
+				max = rating;
+			}
+			if (rating < min) {
+				min = rating;
+			}
+			if (!isNaN(rating)) {
+				count++;
+				return tot + rating;
+			}
+			return tot;
+		}, 0);
+		return tot + sum;
+	}, 0);
+	const average = total / count;
+
+	return {
+		average,
+		max,
+		min,
+		longestSeason
+	};
 };
 
 export default imdb;

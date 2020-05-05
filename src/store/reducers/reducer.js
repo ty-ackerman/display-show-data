@@ -4,7 +4,8 @@ import { updateObject } from '../utility';
 const initialState = {
 	show: {},
 	search: '',
-	results: []
+	results: [],
+	stats: {}
 };
 
 const reducer = (state = initialState, action) => {
@@ -15,6 +16,8 @@ const reducer = (state = initialState, action) => {
 			return updateObject(state, { search: action.search });
 		case actionTypes.SAVE_RESULTS:
 			return updateObject(state, { results: action.results });
+		case actionTypes.SAVE_STATS:
+			return updateObject(state, { stats: action.stats });
 		default:
 			return state;
 	}

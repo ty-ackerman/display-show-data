@@ -1,33 +1,14 @@
-import React, { useState } from 'react';
-import { TextField } from '@material-ui/core';
+import React from 'react';
 import SearchResults from '../components/SearchResults';
-import imdb from '../utils/imdb';
 import { connect } from 'react-redux';
 
 import * as actionCreators from '../store/actions/index';
+import MainSearch from '../components/MainSearch';
 
 function Main(props) {
-	const [ results, setResults ] = useState([]);
-	const [ search, setSearch ] = useState('');
-
-	const handleChange = async (e) => await setSearch(e.target.value);
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		await props.onSaveSearch(search);
-		const data = await imdb.getShow(search);
-		props.onSaveResults(data);
-	};
 	return (
-		<div>
-			<form onSubmit={handleSubmit}>
-				<TextField
-					id="standard-basic"
-					label="Standard"
-					onChange={handleChange}
-					label="Show Title"
-					autoComplete="off"
-				/>
-			</form>
+		<div className="section">
+			<MainSearch />
 			{props.results.length > 0 && <SearchResults results={props.results} />}
 		</div>
 	);

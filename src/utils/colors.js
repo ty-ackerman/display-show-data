@@ -3,7 +3,7 @@
 // 50% = yellow
 // 100% = green
 
-export const relativePercToColor = (perc, min = 0, max = 100) => {
+export const relativePercToColor = (perc, min = 0, max = 10) => {
 	const base = max - min;
 
 	if (base == 0) {
