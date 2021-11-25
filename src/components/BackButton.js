@@ -2,13 +2,8 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 
-function BackButton(props) {
-	const handleClick = () => {
-		props.history.push('/');
-	};
-
-	// need to restyle obviously...
-	const StyledButton = styled.div`
+// need to restyle obviously...
+const StyledButton = styled.div`
 		padding: 5px 10px;
 		border: 1px solid black;
 		cursor: pointer;
@@ -16,6 +11,13 @@ function BackButton(props) {
 		left: 100px;
 		top: 20px;
 	`;
+
+function BackButton(props) {
+	const handleClick = () => {
+		props.history.push('/');
+	};
+
+
 
 	return (
 		<div>

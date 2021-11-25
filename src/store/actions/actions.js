@@ -19,3 +19,11 @@ export const storeStats = (stats) => ({
 	type: actionTypes.SAVE_STATS,
 	stats: stats
 });
+
+export const storeLoading = (isLoading, fullScreen = false) => ({
+	type: actionTypes.SET_LOADING,
+	loading: {
+		isLoading: isLoading,
+		fullScreen: fullScreen
+	}
+});

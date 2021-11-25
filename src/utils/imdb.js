@@ -698,7 +698,7 @@ imdb.getShow = async (q) => {
 		`https://imdb-api.com/en/API/SearchSeries/${process.env.REACT_APP_IMDB_API_KEY2}/${q}`
 	);
 	return data.data.results.filter((show) => {
-		const [ year, medium, type ] = show.description.match(imdb.isShowRegex);
+		const [ year, , type ] = show.description.match(imdb.isShowRegex);
 		show.year = year;
 		return type === 'Series';
 	});
@@ -712,7 +712,7 @@ imdb.queryDbForShow = async (imdbId) => {
 
 // STEP 3 -  Check to see if show is updated in MongoDB
 imdb.isUpdated = (lastUpdated, fullTitle) => {
-	const updatedRecently = parseInt(lastUpdated) + imdb.DAY * 7 > new Date().getTime();
+	const updatedRecently = parseInt(lastUpdated) + imdb.DAY * .01 > new Date().getTime();
 	// temporarily removed stillRunning to limit the amount of requests
 	// const stillRunning = fullTitle.match(imdb.runningRegex);
 	return updatedRecently;

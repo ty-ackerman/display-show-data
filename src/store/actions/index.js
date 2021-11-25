@@ -1,1 +1,1 @@
-export { storeShow, storeSearch, storeSearchResults, storeStats } from './actions';
+export { storeShow, storeSearch, storeSearchResults, storeStats, storeLoading } from './actions';

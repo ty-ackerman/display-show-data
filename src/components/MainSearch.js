@@ -32,11 +32,15 @@ function MainSearch(props) {
 		if (!search.length) {
 			setErrorText('Please enter a valid show title');
 			return;
+		} else if (props.search === search) return;
+		else {
+			props.onSaveResults([]);
+			setErrorText('');
+			props.setLoading(true);
+			await props.onSaveSearch(search);
+			const data = await imdb.getShow(search);
+			props.onSaveResults(data);
 		}
-		setErrorText('');
-		await props.onSaveSearch(search);
-		const data = await imdb.getShow(search);
-		props.onSaveResults(data);
 	};
 
 	return (
@@ -46,11 +50,12 @@ function MainSearch(props) {
 				<TextField
 					id="standard-basic"
 					onChange={handleChange}
-					label="Show Title"
+					label="Search show title"
 					autoComplete="off"
-					error={errorText}
+					error={errorText.length > 0}
 					helperText={errorText}
 					size="medium"
+					defaultValue={props.search}
 				/>
 			</form>
 		</StyledSection>
@@ -59,12 +64,14 @@ function MainSearch(props) {
 
 const mapStateToProps = (state) => ({
 	results: state.results,
-	search: state.search
+	search: state.search,
+	loading: state.loading
 });
 
 const mapDispatchToProps = (dispatch) => ({
 	onSaveSearch: (search) => dispatch(actionCreators.storeSearch(search)),
-	onSaveResults: (shows) => dispatch(actionCreators.storeSearchResults(shows))
+	onSaveResults: (shows) => dispatch(actionCreators.storeSearchResults(shows)),
+	setLoading: (isLoading) => dispatch(actionCreators.storeLoading(isLoading))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainSearch);

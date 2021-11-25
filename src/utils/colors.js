@@ -6,7 +6,7 @@
 export const relativePercToColor = (perc, min = 0, max = 10) => {
 	const base = max - min;
 
-	if (base == 0) {
+	if (base === 0) {
 		perc = 100;
 	} else {
 		perc = (perc - min) / base * 100;

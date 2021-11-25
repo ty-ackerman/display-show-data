@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import imdb from '../utils/imdb';
 import { useHistory } from 'react-router-dom';
@@ -7,11 +7,7 @@ import * as actionCreators from '../store/actions/index';
 import styled from 'styled-components';
 import { Box } from '@material-ui/core';
 
-function Result(props) {
-	const { title, id, image, year } = props.result;
-	const history = useHistory();
-
-	const StyledResult = styled(Box)`
+const StyledResult = styled(Box)`
 		min-width: 200px;
 		width: calc(100% / 5);
 		cursor: pointer;
@@ -62,7 +58,13 @@ function Result(props) {
 
 	`;
 
+
+function Result(props) {
+	const { title, id, image, year } = props.result;
+	const history = useHistory();
+
 	const handleClick = async () => {
+		props.onSetLoading(true, true);
 		const dbShow = await imdb.queryDbForShow(id);
 		if (!dbShow) {
 			props.onSaveShow(await imdb.addShow(props.result));
@@ -93,11 +95,13 @@ function Result(props) {
 
 const mapStatetoProps = (state) => ({
 	show: state.show,
-	results: state.results
+	results: state.results,
+	loading: state.loading
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	onSaveShow: (show) => dispatch(actionCreators.storeShow(show))
+	onSaveShow: (show) => dispatch(actionCreators.storeShow(show)),
+	onSetLoading: (isLoading, fullScreen) => dispatch(actionCreators.storeLoading(isLoading, fullScreen))
 });
 
 export default connect(mapStatetoProps, mapDispatchToProps)(Result);

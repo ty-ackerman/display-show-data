@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const StyledDescription = styled.div`
+	display: flex;
+	align-items: center;
+	padding-bottom: 70px;
+	padding-right: 200px;
+`;
+
 export default function MainDescription() {
-	const StyledDescription = styled.div`
-		display: flex;
-		align-items: center;
-		padding-bottom: 70px;
-		padding-right: 200px;
-	`;
 	return (
 		<StyledDescription>
 			Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, ipsum consequuntur laborum accusantium

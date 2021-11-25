@@ -5,7 +5,11 @@ const initialState = {
 	show: {},
 	search: '',
 	results: [],
-	stats: {}
+	stats: {},
+	loading: {
+		isLoading: false,
+		fullScreen: false
+	}
 };
 
 const reducer = (state = initialState, action) => {
@@ -18,6 +22,8 @@ const reducer = (state = initialState, action) => {
 			return updateObject(state, { results: action.results });
 		case actionTypes.SAVE_STATS:
 			return updateObject(state, { stats: action.stats });
+		case actionTypes.SET_LOADING:
+			return updateObject(state, { loading: action.loading });
 		default:
 			return state;
 	}
