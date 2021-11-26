@@ -8,12 +8,17 @@ import Loader, { SmallLoader } from "../components/Loader";
 import NoResults from "../components/NoResults";
 
 function Main(props) {
-  useEffect(() => {
-    props.setLoading(props.results.length === 0);
-  }, [props.results]);
+  // useEffect(() => {
+  //   props.setLoading(props.results.length === 0);
+  // }, [props.results]);
 
   const renderResults = () => {
-    if (props.results[0] === "No Results") return <NoResults />;
+    if (
+      props.results.length === 0 &&
+      props.search.length &&
+      !props.loading.isLoading
+    )
+      return <NoResults />;
     else if (
       props.search.length &&
       props.loading.isLoading &&

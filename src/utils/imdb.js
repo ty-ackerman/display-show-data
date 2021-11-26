@@ -1,691 +1,7 @@
-// Temporarily held here
-// Will be made into a Redux action
-
-import axios from 'axios';
+import axios from "axios";
+import stats from "./statistics";
 
 const imdb = {};
-
-imdb.seasons = [
-	{
-		imDbId: 'tt8420184',
-		title: 'The Last Dance',
-		fullTitle: 'The Last Dance (TV Mini-Series 2020– )',
-		type: 'TVSeries',
-		year: '2020',
-		episodes: [
-			{
-				id: 'tt8434580',
-				seasonNumber: '1',
-				episodeNumber: '1',
-				title: 'Episode #1.1',
-				image:
-					'https://imdb-api.com/images/original/MV5BMGYzZWVmNTAtYWQ5My00OGVmLThmM2UtOTNhODZmYjI3MTgxXkEyXkFqcGdeQXVyMTA1MjI2MzE@._V1_Ratio1.7778_AL_.jpg',
-				year: '2020',
-				released: '19 Apr. 2020',
-				plot:
-					'The Chicago Bulls look for their third straight NBA Championship but the off-season is full of front office and player tension.',
-				imDbRating: '9.3',
-				imDbRatingCount: '810'
-			},
-			{
-				id: 'tt8434582',
-				seasonNumber: '1',
-				episodeNumber: '2',
-				title: 'Episode #1.2',
-				image:
-					'https://imdb-api.com/images/original/MV5BZjIzY2FjNGUtMDA1ZC00Y2FiLWFhZWYtNzhmYjUzYjMzYjk0XkEyXkFqcGdeQXVyMTA1MjI2MzE@._V1_Ratio1.7778_AL_.jpg',
-				year: '2020',
-				released: '19 Apr. 2020',
-				plot:
-					"A look at Scottie Pippen's arrival all the way to his injury and how it caused friction to begin the season.",
-				imDbRating: '9.3',
-				imDbRatingCount: '667'
-			},
-			{
-				id: 'tt8434584',
-				seasonNumber: '1',
-				episodeNumber: '3',
-				title: 'Episode #1.3',
-				image: '',
-				year: '2020',
-				released: '26 Apr. 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			},
-			{
-				id: 'tt8434588',
-				seasonNumber: '1',
-				episodeNumber: '4',
-				title: 'Episode #1.4',
-				image: '',
-				year: '2020',
-				released: '26 Apr. 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			},
-			{
-				id: 'tt8434590',
-				seasonNumber: '1',
-				episodeNumber: '5',
-				title: 'Episode #1.5',
-				image: '',
-				year: '2020',
-				released: '3 May 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			},
-			{
-				id: 'tt8434592',
-				seasonNumber: '1',
-				episodeNumber: '6',
-				title: 'Episode #1.6',
-				image: '',
-				year: '2020',
-				released: '3 May 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			},
-			{
-				id: 'tt8434594',
-				seasonNumber: '1',
-				episodeNumber: '7',
-				title: 'Episode #1.7',
-				image: '',
-				year: '2020',
-				released: '10 May 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			},
-			{
-				id: 'tt8434596',
-				seasonNumber: '1',
-				episodeNumber: '8',
-				title: 'Episode #1.8',
-				image: '',
-				year: '2020',
-				released: '10 May 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			},
-			{
-				id: 'tt8434600',
-				seasonNumber: '1',
-				episodeNumber: '9',
-				title: 'Episode #1.9',
-				image: '',
-				year: '2020',
-				released: '17 May 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			},
-			{
-				id: 'tt8434604',
-				seasonNumber: '1',
-				episodeNumber: '10',
-				title: 'Episode #1.10',
-				image: '',
-				year: '2020',
-				released: '17 May 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			}
-		],
-		errorMessage: ''
-	},
-	{
-		imDbId: 'tt8420184',
-		title: 'The Last Dance',
-		fullTitle: 'The Last Dance (TV Mini-Series 2020– )',
-		type: 'TVSeries',
-		year: '2020',
-		episodes: [
-			{
-				id: 'tt8434580',
-				seasonNumber: '1',
-				episodeNumber: '1',
-				title: 'Episode #1.1',
-				image:
-					'https://imdb-api.com/images/original/MV5BMGYzZWVmNTAtYWQ5My00OGVmLThmM2UtOTNhODZmYjI3MTgxXkEyXkFqcGdeQXVyMTA1MjI2MzE@._V1_Ratio1.7778_AL_.jpg',
-				year: '2020',
-				released: '19 Apr. 2020',
-				plot:
-					'The Chicago Bulls look for their third straight NBA Championship but the off-season is full of front office and player tension.',
-				imDbRating: '9.3',
-				imDbRatingCount: '810'
-			},
-			{
-				id: 'tt8434582',
-				seasonNumber: '1',
-				episodeNumber: '2',
-				title: 'Episode #1.2',
-				image:
-					'https://imdb-api.com/images/original/MV5BZjIzY2FjNGUtMDA1ZC00Y2FiLWFhZWYtNzhmYjUzYjMzYjk0XkEyXkFqcGdeQXVyMTA1MjI2MzE@._V1_Ratio1.7778_AL_.jpg',
-				year: '2020',
-				released: '19 Apr. 2020',
-				plot:
-					"A look at Scottie Pippen's arrival all the way to his injury and how it caused friction to begin the season.",
-				imDbRating: '9.3',
-				imDbRatingCount: '667'
-			},
-			{
-				id: 'tt8434584',
-				seasonNumber: '1',
-				episodeNumber: '3',
-				title: 'Episode #1.3',
-				image: '',
-				year: '2020',
-				released: '26 Apr. 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			},
-			{
-				id: 'tt8434588',
-				seasonNumber: '1',
-				episodeNumber: '4',
-				title: 'Episode #1.4',
-				image: '',
-				year: '2020',
-				released: '26 Apr. 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			},
-			{
-				id: 'tt8434590',
-				seasonNumber: '1',
-				episodeNumber: '5',
-				title: 'Episode #1.5',
-				image: '',
-				year: '2020',
-				released: '3 May 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			},
-			{
-				id: 'tt8434592',
-				seasonNumber: '1',
-				episodeNumber: '6',
-				title: 'Episode #1.6',
-				image: '',
-				year: '2020',
-				released: '3 May 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			},
-			{
-				id: 'tt8434594',
-				seasonNumber: '1',
-				episodeNumber: '7',
-				title: 'Episode #1.7',
-				image: '',
-				year: '2020',
-				released: '10 May 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			},
-			{
-				id: 'tt8434596',
-				seasonNumber: '1',
-				episodeNumber: '8',
-				title: 'Episode #1.8',
-				image: '',
-				year: '2020',
-				released: '10 May 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			},
-			{
-				id: 'tt8434600',
-				seasonNumber: '1',
-				episodeNumber: '9',
-				title: 'Episode #1.9',
-				image: '',
-				year: '2020',
-				released: '17 May 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			},
-			{
-				id: 'tt8434604',
-				seasonNumber: '1',
-				episodeNumber: '10',
-				title: 'Episode #1.10',
-				image: '',
-				year: '2020',
-				released: '17 May 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			}
-		],
-		errorMessage: ''
-	},
-	{
-		imDbId: 'tt8420184',
-		title: 'The Last Dance',
-		fullTitle: 'The Last Dance (TV Mini-Series 2020– )',
-		type: 'TVSeries',
-		year: '2020',
-		episodes: [
-			{
-				id: 'tt8434580',
-				seasonNumber: '1',
-				episodeNumber: '1',
-				title: 'Episode #1.1',
-				image:
-					'https://imdb-api.com/images/original/MV5BMGYzZWVmNTAtYWQ5My00OGVmLThmM2UtOTNhODZmYjI3MTgxXkEyXkFqcGdeQXVyMTA1MjI2MzE@._V1_Ratio1.7778_AL_.jpg',
-				year: '2020',
-				released: '19 Apr. 2020',
-				plot:
-					'The Chicago Bulls look for their third straight NBA Championship but the off-season is full of front office and player tension.',
-				imDbRating: '9.3',
-				imDbRatingCount: '810'
-			},
-			{
-				id: 'tt8434582',
-				seasonNumber: '1',
-				episodeNumber: '2',
-				title: 'Episode #1.2',
-				image:
-					'https://imdb-api.com/images/original/MV5BZjIzY2FjNGUtMDA1ZC00Y2FiLWFhZWYtNzhmYjUzYjMzYjk0XkEyXkFqcGdeQXVyMTA1MjI2MzE@._V1_Ratio1.7778_AL_.jpg',
-				year: '2020',
-				released: '19 Apr. 2020',
-				plot:
-					"A look at Scottie Pippen's arrival all the way to his injury and how it caused friction to begin the season.",
-				imDbRating: '9.3',
-				imDbRatingCount: '667'
-			},
-			{
-				id: 'tt8434584',
-				seasonNumber: '1',
-				episodeNumber: '3',
-				title: 'Episode #1.3',
-				image: '',
-				year: '2020',
-				released: '26 Apr. 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			},
-			{
-				id: 'tt8434588',
-				seasonNumber: '1',
-				episodeNumber: '4',
-				title: 'Episode #1.4',
-				image: '',
-				year: '2020',
-				released: '26 Apr. 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			},
-			{
-				id: 'tt8434590',
-				seasonNumber: '1',
-				episodeNumber: '5',
-				title: 'Episode #1.5',
-				image: '',
-				year: '2020',
-				released: '3 May 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			},
-			{
-				id: 'tt8434592',
-				seasonNumber: '1',
-				episodeNumber: '6',
-				title: 'Episode #1.6',
-				image: '',
-				year: '2020',
-				released: '3 May 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			},
-			{
-				id: 'tt8434594',
-				seasonNumber: '1',
-				episodeNumber: '7',
-				title: 'Episode #1.7',
-				image: '',
-				year: '2020',
-				released: '10 May 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			},
-			{
-				id: 'tt8434596',
-				seasonNumber: '1',
-				episodeNumber: '8',
-				title: 'Episode #1.8',
-				image: '',
-				year: '2020',
-				released: '10 May 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			},
-			{
-				id: 'tt8434600',
-				seasonNumber: '1',
-				episodeNumber: '9',
-				title: 'Episode #1.9',
-				image: '',
-				year: '2020',
-				released: '17 May 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			},
-			{
-				id: 'tt8434604',
-				seasonNumber: '1',
-				episodeNumber: '10',
-				title: 'Episode #1.10',
-				image: '',
-				year: '2020',
-				released: '17 May 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			}
-		],
-		errorMessage: ''
-	},
-	{
-		imDbId: 'tt8420184',
-		title: 'The Last Dance',
-		fullTitle: 'The Last Dance (TV Mini-Series 2020– )',
-		type: 'TVSeries',
-		year: '2020',
-		episodes: [
-			{
-				id: 'tt8434580',
-				seasonNumber: '1',
-				episodeNumber: '1',
-				title: 'Episode #1.1',
-				image:
-					'https://imdb-api.com/images/original/MV5BMGYzZWVmNTAtYWQ5My00OGVmLThmM2UtOTNhODZmYjI3MTgxXkEyXkFqcGdeQXVyMTA1MjI2MzE@._V1_Ratio1.7778_AL_.jpg',
-				year: '2020',
-				released: '19 Apr. 2020',
-				plot:
-					'The Chicago Bulls look for their third straight NBA Championship but the off-season is full of front office and player tension.',
-				imDbRating: '9.3',
-				imDbRatingCount: '810'
-			},
-			{
-				id: 'tt8434582',
-				seasonNumber: '1',
-				episodeNumber: '2',
-				title: 'Episode #1.2',
-				image:
-					'https://imdb-api.com/images/original/MV5BZjIzY2FjNGUtMDA1ZC00Y2FiLWFhZWYtNzhmYjUzYjMzYjk0XkEyXkFqcGdeQXVyMTA1MjI2MzE@._V1_Ratio1.7778_AL_.jpg',
-				year: '2020',
-				released: '19 Apr. 2020',
-				plot:
-					"A look at Scottie Pippen's arrival all the way to his injury and how it caused friction to begin the season.",
-				imDbRating: '9.3',
-				imDbRatingCount: '667'
-			},
-			{
-				id: 'tt8434584',
-				seasonNumber: '1',
-				episodeNumber: '3',
-				title: 'Episode #1.3',
-				image: '',
-				year: '2020',
-				released: '26 Apr. 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			},
-			{
-				id: 'tt8434588',
-				seasonNumber: '1',
-				episodeNumber: '4',
-				title: 'Episode #1.4',
-				image: '',
-				year: '2020',
-				released: '26 Apr. 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			},
-			{
-				id: 'tt8434590',
-				seasonNumber: '1',
-				episodeNumber: '5',
-				title: 'Episode #1.5',
-				image: '',
-				year: '2020',
-				released: '3 May 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			},
-			{
-				id: 'tt8434592',
-				seasonNumber: '1',
-				episodeNumber: '6',
-				title: 'Episode #1.6',
-				image: '',
-				year: '2020',
-				released: '3 May 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			},
-			{
-				id: 'tt8434594',
-				seasonNumber: '1',
-				episodeNumber: '7',
-				title: 'Episode #1.7',
-				image: '',
-				year: '2020',
-				released: '10 May 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			},
-			{
-				id: 'tt8434596',
-				seasonNumber: '1',
-				episodeNumber: '8',
-				title: 'Episode #1.8',
-				image: '',
-				year: '2020',
-				released: '10 May 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			},
-			{
-				id: 'tt8434600',
-				seasonNumber: '1',
-				episodeNumber: '9',
-				title: 'Episode #1.9',
-				image: '',
-				year: '2020',
-				released: '17 May 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			},
-			{
-				id: 'tt8434604',
-				seasonNumber: '1',
-				episodeNumber: '10',
-				title: 'Episode #1.10',
-				image: '',
-				year: '2020',
-				released: '17 May 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			}
-		],
-		errorMessage: ''
-	},
-	{
-		imDbId: 'tt8420184',
-		title: 'The Last Dance',
-		fullTitle: 'The Last Dance (TV Mini-Series 2020– )',
-		type: 'TVSeries',
-		year: '2020',
-		episodes: [
-			{
-				id: 'tt8434580',
-				seasonNumber: '1',
-				episodeNumber: '1',
-				title: 'Episode #1.1',
-				image:
-					'https://imdb-api.com/images/original/MV5BMGYzZWVmNTAtYWQ5My00OGVmLThmM2UtOTNhODZmYjI3MTgxXkEyXkFqcGdeQXVyMTA1MjI2MzE@._V1_Ratio1.7778_AL_.jpg',
-				year: '2020',
-				released: '19 Apr. 2020',
-				plot:
-					'The Chicago Bulls look for their third straight NBA Championship but the off-season is full of front office and player tension.',
-				imDbRating: '9.3',
-				imDbRatingCount: '810'
-			},
-			{
-				id: 'tt8434582',
-				seasonNumber: '1',
-				episodeNumber: '2',
-				title: 'Episode #1.2',
-				image:
-					'https://imdb-api.com/images/original/MV5BZjIzY2FjNGUtMDA1ZC00Y2FiLWFhZWYtNzhmYjUzYjMzYjk0XkEyXkFqcGdeQXVyMTA1MjI2MzE@._V1_Ratio1.7778_AL_.jpg',
-				year: '2020',
-				released: '19 Apr. 2020',
-				plot:
-					"A look at Scottie Pippen's arrival all the way to his injury and how it caused friction to begin the season.",
-				imDbRating: '9.3',
-				imDbRatingCount: '667'
-			},
-			{
-				id: 'tt8434584',
-				seasonNumber: '1',
-				episodeNumber: '3',
-				title: 'Episode #1.3',
-				image: '',
-				year: '2020',
-				released: '26 Apr. 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			},
-			{
-				id: 'tt8434588',
-				seasonNumber: '1',
-				episodeNumber: '4',
-				title: 'Episode #1.4',
-				image: '',
-				year: '2020',
-				released: '26 Apr. 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			},
-			{
-				id: 'tt8434590',
-				seasonNumber: '1',
-				episodeNumber: '5',
-				title: 'Episode #1.5',
-				image: '',
-				year: '2020',
-				released: '3 May 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			},
-			{
-				id: 'tt8434592',
-				seasonNumber: '1',
-				episodeNumber: '6',
-				title: 'Episode #1.6',
-				image: '',
-				year: '2020',
-				released: '3 May 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			},
-			{
-				id: 'tt8434594',
-				seasonNumber: '1',
-				episodeNumber: '7',
-				title: 'Episode #1.7',
-				image: '',
-				year: '2020',
-				released: '10 May 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			},
-			{
-				id: 'tt8434596',
-				seasonNumber: '1',
-				episodeNumber: '8',
-				title: 'Episode #1.8',
-				image: '',
-				year: '2020',
-				released: '10 May 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			},
-			{
-				id: 'tt8434600',
-				seasonNumber: '1',
-				episodeNumber: '9',
-				title: 'Episode #1.9',
-				image: '',
-				year: '2020',
-				released: '17 May 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			},
-			{
-				id: 'tt8434604',
-				seasonNumber: '1',
-				episodeNumber: '10',
-				title: 'Episode #1.10',
-				image: '',
-				year: '2020',
-				released: '17 May 2020',
-				plot: 'Know what this is about? Be the first one to add a plot.',
-				imDbRating: '',
-				imDbRatingCount: ''
-			}
-		],
-		errorMessage: ''
-	},
-	{
-		imDbId: 'tt8420184',
-		title: 'The Last Dance',
-		fullTitle: 'The Last Dance (TV Mini-Series 2020– )',
-		type: 'TVSeries',
-		year: '2020',
-		episodes: [],
-		errorMessage: '404 Error: SeasonNumber Not Founded'
-	}
-];
 
 imdb.DAY = 86400000;
 imdb.runningRegex = /[0-9]{4}\S\D/g;
@@ -693,111 +9,149 @@ imdb.idRegex = /\w+$/g;
 imdb.isShowRegex = /\w+/g;
 
 // STEP 1 - Gets the show titles + info from IMDB
+imdb.getShowRequest = async (q, key = 1, max = 4) => {
+  const varName = `REACT_APP_IMDB_API_KEY${key}`;
+  const data = await axios.get(
+    `https://imdb-api.com/en/API/SearchSeries/${`${process.env[varName]}`}/${q}`
+  );
+  if (data.data.errorMessage.length > 0) {
+    if (key === max) {
+      return false;
+    } else {
+      return await imdb.getShowRequest(q, key + 1);
+    }
+  }
+
+  return data;
+};
+
 imdb.getShow = async (q) => {
-	const data = await axios.get(
-		`https://imdb-api.com/en/API/SearchSeries/${process.env.REACT_APP_IMDB_API_KEY2}/${q}`
-	);
-	return data.data.results.filter((show) => {
-		const [ year, , type ] = show.description.match(imdb.isShowRegex);
-		show.year = year;
-		return type === 'Series';
-	});
+  const data = await imdb.getShowRequest(q);
+  return data.data.results.filter((show) => {
+    const [year, , type] = show.description.match(imdb.isShowRegex);
+    show.year = year;
+    return type === "Series";
+  });
 };
 
 // STEP 2 - User selects show -> Check MongoDB for series
 imdb.queryDbForShow = async (imdbId) => {
-	const show = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/shows/imdb/${imdbId}`);
-	return show.data.data;
+  const show = await axios.get(
+    `${process.env.REACT_APP_BACKEND_URL}/shows/imdb/${imdbId}`
+  );
+  return show.data.data;
 };
 
 // STEP 3 -  Check to see if show is updated in MongoDB
 imdb.isUpdated = (lastUpdated, fullTitle) => {
-	const updatedRecently = parseInt(lastUpdated) + imdb.DAY * .01 > new Date().getTime();
-	// temporarily removed stillRunning to limit the amount of requests
-	// const stillRunning = fullTitle.match(imdb.runningRegex);
-	return updatedRecently;
+  const updatedRecently =
+    parseInt(lastUpdated) + imdb.DAY * 7 > new Date().getTime();
+  // temporarily removed stillRunning to limit the amount of requests
+  // const stillRunning = fullTitle.match(imdb.runningRegex);
+  return updatedRecently;
 };
 
 // OPTION A - Show is not in MongoDB -> Step 2 = []
 imdb.addShow = async (show) => {
-	const res = await axios.post('/shows', { show });
-	const { data } = res.data;
-	const updatedShow = await imdb.updateShow(data.id, data._id);
-	return updatedShow;
+  const res = await axios.post("/shows", { show });
+  const { data } = res.data;
+  const updatedShow = await imdb.updateShow(data.id, data._id);
+  return updatedShow;
 };
 
 // OPTION B - Show is in MongoDB, but out of date -> second fuction false
 
 imdb.updateShow = async (imdbId, _id) => {
-	const { seasons, fullTitle } = await imdb.getSeasons(imdbId);
-	const updatedShow = await imdb.addSeasons(_id, seasons, fullTitle);
-	return updatedShow;
+  const { seasons, fullTitle } = await imdb.getSeasons(imdbId);
+  const updatedShow = await imdb.addSeasons(_id, seasons, fullTitle);
+  return updatedShow;
 };
 
 // Extra functions
 
 imdb.getSeasons = async (imdbId, i = 1) => {
-	const seasons = [];
-	let season = await imdb.getEpisodes(imdbId, i);
-	const { fullTitle } = season;
-	while (season.episodes.length) {
-		seasons.push(season.episodes);
-		i++;
-		season = await imdb.getEpisodes(imdbId, i);
-	}
-	console.log(seasons);
-	return { seasons, fullTitle };
+  const seasons = [];
+  let season = await imdb.getEpisodes(imdbId, i);
+  const { fullTitle } = season;
+  while (season.episodes.length) {
+    seasons.push(season.episodes);
+    i++;
+    season = await imdb.getEpisodes(imdbId, i);
+  }
+  console.log(seasons);
+  return { seasons, fullTitle };
+};
+
+imdb.getEpisodesRequest = async (imdbId, season, key = 1, max = 4) => {
+  const varName = `REACT_APP_IMDB_API_KEY${key}`;
+  const data = await axios.get(
+    `https://imdb-api.com/en/API/SeasonEpisodes/${process.env[varName]}/${imdbId}/${season}`
+  );
+  if (!data.data.episodes) {
+    if (key === max) {
+      return false;
+    } else {
+      return await imdb.getEpisodesRequest(imdbId, season, key + 1);
+    }
+  }
+  return data;
 };
 
 imdb.getEpisodes = async (imdbId, season) => {
-	// gets a list of all episodes in a season
-	const res = await axios.get(
-		`https://imdb-api.com/en/API/SeasonEpisodes/${process.env.REACT_APP_IMDB_API_KEY2}/${imdbId}/${season}`
-	);
-	return res.data;
+  // gets a list of all episodes in a season
+  const res = await imdb.getEpisodesRequest(imdbId, season);
+  return res.data;
 };
 
 imdb.addSeasons = async (_id, seasons, fullTitle) => {
-	const res = await axios.patch(`${process.env.REACT_APP_BACKEND_URL}/shows/seasons`, {
-		_id,
-		seasons,
-		fullTitle,
-		lastUpdated: new Date().getTime()
-	});
-	return res.data.data;
+  const res = await axios.patch(
+    `${process.env.REACT_APP_BACKEND_URL}/shows/seasons`,
+    {
+      _id,
+      seasons,
+      fullTitle,
+      lastUpdated: new Date().getTime(),
+    }
+  );
+  return res.data.data;
 };
 
 imdb.getStats = (seasons = []) => {
-	let count = 0;
-	let max = 0;
-	let min = 10;
-	let longestSeason = 0;
-	const total = seasons.reduce((tot, episodes) => {
-		longestSeason = episodes.length > longestSeason ? episodes.length : longestSeason;
-		const sum = episodes.reduce((tot, cur) => {
-			const rating = parseFloat(cur.imDbRating);
-			if (rating > max) {
-				max = rating;
-			}
-			if (rating < min) {
-				min = rating;
-			}
-			if (!isNaN(rating)) {
-				count++;
-				return tot + rating;
-			}
-			return tot;
-		}, 0);
-		return tot + sum;
-	}, 0);
-	const average = total / count;
+  let count = 0;
+  let max = 0;
+  let min = 10;
+  let longestSeason = 0;
+  const total = seasons.reduce((tot, episodes) => {
+    longestSeason =
+      episodes.length > longestSeason ? episodes.length : longestSeason;
+    const sum = episodes.reduce((tot, cur) => {
+      const rating = parseFloat(cur.imDbRating);
+      if (rating > max) {
+        max = rating;
+      }
+      if (rating < min) {
+        min = rating;
+      }
+      if (!isNaN(rating)) {
+        count++;
+        return tot + rating;
+      }
+      return tot;
+    }, 0);
+    return tot + sum;
+  }, 0);
+  const average = total / count;
 
-	return {
-		average,
-		max,
-		min,
-		longestSeason
-	};
+  const { standardDev, variance } = stats.getStdVar(seasons, average);
+
+  return {
+    average,
+    max,
+    min,
+    longestSeason,
+    standardDev,
+    variance,
+  };
 };
 
 export default imdb;
